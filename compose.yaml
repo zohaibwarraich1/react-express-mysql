@@ -1,0 +1,56 @@
+version: "3.8"
+services:
+  backend:
+    build:
+      context: ./backend
+    image: backend_image
+    container_name: backend_container
+    environment:
+      - DATABASE_DB=example
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=/run/secrets/db-password
+      - DATABASE_HOST=db
+    ports:
+      - 5000:5000
+    secrets:
+      - db-password
+    networks:
+      - public
+    depends_on:
+      - db
+  db:
+    container_name: mysql_container
+    image: mysql
+    restart: always
+    secrets:
+      - db-password
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - private
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=example
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
+  
+  frontend_nginx:
+    build:
+      context: ./frontend
+    image: frontend_nginx_image
+    container_name: frontend_nginx_container
+    ports:
+      - 80:80
+    networks:
+      - public
+    depends_on:
+      - backend
+    restart: always
+networks:
+  public:
+  private:
+volumes:
+  db-data:
+secrets:
+  db-password:
+    file: db/password.txt
