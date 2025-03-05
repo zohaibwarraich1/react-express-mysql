@@ -9,6 +9,8 @@ pipeline {
         }
         stage("Build"){
             steps{
+                sh "docker build -t react-express-mysql-frontend-image ./frontend"
+                sh "docker build -t react-express-mysql-backend-image ./backend"
                 echo "Build Successfully!"
             }
         }
