@@ -9,17 +9,17 @@ pipeline {
         }
         stage("Build"){
             steps{
-                
+                echo "Build Successfully!"
             }
         }
         stage("Push on Docker-Hub"){
             steps{
-                
+                echo "Pushed Successfully!"
             }
         }
         stage("Deploy"){
             steps{
-                
+                echo "Deployed Successfully!"
             }
         }
     }
