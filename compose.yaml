@@ -1,9 +1,7 @@
 version: "3.8"
 services:
   backend:
-    build:
-      context: ./backend
-    image: backend_image
+    image: zohaibwarraich/react-express-mysql-backend-image
     container_name: backend_container
     environment:
       - DATABASE_DB=example
@@ -35,9 +33,7 @@ services:
       - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
   
   frontend_nginx:
-    build:
-      context: ./frontend
-    image: frontend_nginx_image
+    image: zohaibwarraich/react-express-mysql-frontend-image
     container_name: frontend_nginx_container
     ports:
       - 80:80
