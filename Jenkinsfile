@@ -17,10 +17,10 @@ pipeline {
         stage("Push on Docker-Hub"){
             steps{
                 withCredentials([usernamePassword(credentialsId: 'your-credential-id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
-                    sh "docker image -tag react-express-mysql-frontend-image:latest ${env.USERNAME}/react-express-mysql-frontend-image::latest"
-                    sh "docker image -tag react-express-mysql-backend-image:latest ${env.USERNAME}/react-express-mysql-backend-image::latest"
-                    sh "docker push ${env.USERNAME}/react-express-mysql-frontend-image::latest"
-                    sh "docker push ${env.USERNAME}/react-express-mysql-backend-image::latest"
+                    sh "docker image -tag react-express-mysql-frontend-image:latest ${env.USERNAME}/react-express-mysql-frontend-image:latest"
+                    sh "docker image -tag react-express-mysql-backend-image:latest ${env.USERNAME}/react-express-mysql-backend-image:latest"
+                    sh "docker push ${env.USERNAME}/react-express-mysql-frontend-image:latest"
+                    sh "docker push ${env.USERNAME}/react-express-mysql-backend-image:latest"
                 }
                 echo "Pushed Successfully!"
             }
